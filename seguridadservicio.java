@@ -50,6 +50,36 @@ public class seguridadservicio {
 
 
 
+    public boolean VerificarPermiso (String correoIngresado, String AccionSolicitada) {
 
+    String rolUsuario = BaseDeDatosRoles.get(correoIngresado);
+
+    if (rolUsuario == null) {
+        System.out.println("Error: El usuario no tiene un rol asisgnado.");
+        return false;
+
+        }
+        
+        switch (AccionSolicitada){
+            
+            case "AGENDAR_CITA":
+
+              return rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("CLIENTE");
+
+            case "CONSULTAR_DISPONIBILIDAD":
+
+              return rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("PELUQUERO");
+
+            case "ELIMINAR_CITA":
+            case "EDITOR_AGENDA":
+
+             return rolUsuario.equals("ADMINISTRADOR");
+
+            default:
+                System.out.println("Error: la accion solicitada no existe en el sistema.");
+                return false;
+
+        }
+
+    
     }
-
