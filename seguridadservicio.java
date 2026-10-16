@@ -63,6 +63,7 @@ public class seguridadservicio {
         switch (AccionSolicitada){
             
             case "AGENDAR_CITA":
+            case "ELIMINAR_CITA":
 
               return rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("CLIENTE");
 
@@ -70,8 +71,8 @@ public class seguridadservicio {
 
               return rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("PELUQUERO");
 
-            case "ELIMINAR_CITA":
-            case "EDITOR_AGENDA":
+            case "EDITAR_AGENDA":
+            case "GESTINAR_USUARIOS":
 
              return rolUsuario.equals("ADMINISTRADOR");
 
@@ -83,3 +84,4 @@ public class seguridadservicio {
 
     
     }
+}
