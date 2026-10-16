@@ -12,8 +12,8 @@ public class seguridadservicio {
         BaseDeDatosUsuarios = new HashMap<>();
         BaseDeDatosRoles = new HashMap<>();
 
-        BaseDeDatosUsuarios.put("administradorPeluqueria.com", "Administrador123");
-        BaseDeDatosRoles.put("adminiestaadorPeluqueria.com" ,"ADMINIESTRADOR" );
+        BaseDeDatosUsuarios.put("administrador@Peluqueria.com", "Administrador123");
+        BaseDeDatosRoles.put("adminiestaador@Peluqueria.com" ,"ADMINIESTRADOR" );
          
         BaseDeDatosUsuarios.put("peluquero@peluqueria.com", "pelu123");
         BaseDeDatosRoles.put("peluquero@peluqueria.com", "PELUQUERO");
@@ -84,4 +84,23 @@ public class seguridadservicio {
 
     
     }
+
+    public boolean ValidarTexto(String TextoIngresado){
+
+        if (TextoIngresado == null || TextoIngresado.trim(). isEmpty()) {
+            System.err.println("Error: El campo de texto no puede estar vacio.");
+            
+        }
+
+        if (TextoIngresado.contains("<") || TextoIngresado.contains(">") || TextoIngresado.contains(";")  ) {
+            System.out.println("Error: El texto contiene caracteres no permitidos (<, >, ;).");
+            return false;
+        }
+
+        return false;
+    }
+
+    
+
 }
+
