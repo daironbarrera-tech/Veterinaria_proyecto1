@@ -43,6 +43,23 @@ public class ControlAgendaService {
         return true;
     }
 
+    /**
+     * TAREA 3: Generar mensaje de recordatorio/notificación
+     */
+    public String generarRecordatorio(Cita cita, String medioNotificacion) {
+        String mensaje = "--------------------------------------------------\n" +
+                         "📱 NOTIFICACIÓN DE CITA VETERINARIA TSYC (" + medioNotificacion + ")\n" +
+                         "Hola " + cita.getCliente() + ",\n" +
+                         "Te recordamos la cita para tu mascota " + cita.getMascota() + ".\n" +
+                         "• Servicio: " + cita.getServicio() + "\n" +
+                         "• Peluquero: " + cita.getPeluquero() + "\n" +
+                         "• Fecha: " + cita.getFecha() + "\n" +
+                         "• Hora: " + cita.getHora() + "\n" +
+                         "¡Te esperamos!\n" +
+                         "--------------------------------------------------";
+        return mensaje;
+    }
+
     // Devuelve la lista completa de citas
     public List<Cita> getListaDeCitas() {
         return listaDeCitas;
