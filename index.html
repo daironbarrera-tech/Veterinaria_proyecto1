@@ -1,31 +1,149 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>veterinaria_DAaa</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veterinaria Dayron y su combo</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
-<H1>presentacion del proyecto</H1>
-<h4> hola</h4>
 
-<p>hola, como estan? delen duro que les cogio la tarde jajaja</p>
-<P>bien</P>
-<p></p>
-<button>click </button>
+  <header class="barra">
+    <a class="marca" href="#inicio">Veterinaria Dayron y su combo</a>
+    <nav>
+      <a href="#servicios">Servicios</a>
+      <a href="#equipo">Equipo</a>
+      <a href="#cita">Agendar cita</a>
+    </nav>
+  </header>
 
-<h1>hola colombia monitoria  comapa </h1>
+  <main>
+    <section class="hero" id="inicio">
+      <h1>Peluquería para mascotas, con cita y sin filas</h1>
+      <p>Elige el servicio, el peluquero y la hora. Nosotros cuidamos a tu mascota.</p>
+      <a class="boton" href="#cita">Agendar cita</a>
+    </section>
 
-<a href="seguridadservicio.java" target="_blank">
+    <section id="servicios">
+      <h2>Servicios</h2>
+      <ul class="servicios">
+        <li><strong>Baño completo</strong><span>60 min</span><b>$35.000</b></li>
+        <li><strong>Corte de pelo</strong><span>75 min</span><b>$45.000</b></li>
+        <li><strong>Corte de uñas</strong><span>20 min</span><b>$12.000</b></li>
+        <li><strong>Limpieza de oídos</strong><span>20 min</span><b>$15.000</b></li>
+      </ul>
+    </section>
 
-  <button type="button">Abrir página</button>
+    <section id="equipo">
+      <h2>Equipo</h2>
+      <dl class="equipo">
+        <dt>Laura</dt>
+        <dd>Especialista en caninos · turno de la mañana</dd>
+        <dt>Andrés</dt>
+        <dd>Especialista en felinos · turno de la tarde</dd>
+      </dl>
+    </section>
 
- <p>hola, como estan? que tal la clase jajaja</p>
+    <section id="cita">
+      <h2>Agendar cita</h2>
+      <form id="formCita" novalidate>
+        <div class="campo">
+          <label for="cliente">Tu nombre</label>
+          <input id="cliente" name="cliente" type="text" required autocomplete="name">
+        </div>
+        <div class="campo">
+          <label for="correo">Correo</label>
+          <input id="correo" name="correo" type="email" required autocomplete="email">
+        </div>
+        <div class="campo">
+          <label for="mascota">Nombre de la mascota</label>
+          <input id="mascota" name="mascota" type="text" required>
+        </div>
+        <div class="campo">
+          <label for="raza">Raza</label>
+          <input id="raza" name="raza" type="text" required>
+        </div>
+        <div class="campo">
+          <label for="tamano">Tamaño</label>
+          <select id="tamano" name="tamano" required>
+            <option value="">Selecciona</option>
+            <option>Pequeño</option>
+            <option>Mediano</option>
+            <option>Grande</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label for="servicio">Servicio</label>
+          <select id="servicio" name="servicio" required>
+            <option value="">Selecciona</option>
+            <option>Baño completo</option>
+            <option>Corte de pelo</option>
+            <option>Corte de uñas</option>
+            <option>Limpieza de oídos</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label for="peluquero">Peluquero</label>
+          <select id="peluquero" name="peluquero" required>
+            <option value="">Selecciona</option>
+            <option>Laura</option>
+            <option>Andrés</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label for="fecha">Fecha</label>
+          <input id="fecha" name="fecha" type="date" required>
+        </div>
+        <div class="campo">
+          <label for="hora">Hora</label>
+          <input id="hora" name="hora" type="time" required>
+        </div>
 
+        <button class="boton" type="submit">Confirmar cita</button>
+        <p id="mensaje" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
 
-</a>
-  
+  <footer>
+    <p>Veterinaria Dayron y su combo · Bogotá, Colombia</p>
+  </footer>
+
+  <script>
+    // Misma regla que validarTexto() en SeguridadServicio.java
+    var prohibidos = /[<>;]/;
+    var form = document.getElementById("formCita");
+    var mensaje = document.getElementById("mensaje");
+
+    document.getElementById("fecha").min = new Date().toISOString().split("T")[0];
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      mensaje.className = "";
+
+      var campos = form.elements;
+      for (var i = 0; i < campos.length; i++) {
+        var c = campos[i];
+        if (!c.name) continue;
+        if (!c.value.trim()) {
+          mensaje.textContent = "Completa el campo: " + form.querySelector("label[for=" + c.id + "]").textContent + ".";
+          mensaje.className = "error";
+          c.focus();
+          return;
+        }
+        if (prohibidos.test(c.value)) {
+          mensaje.textContent = "Quita los caracteres <, > y ; del campo " + form.querySelector("label[for=" + c.id + "]").textContent + ".";
+          mensaje.className = "error";
+          c.focus();
+          return;
+        }
+      }
+
+      mensaje.textContent = "Cita confirmada para " + form.mascota.value + " el " + form.fecha.value + " a las " + form.hora.value + ".";
+      mensaje.className = "ok";
+      form.reset();
+    });
+  </script>
 </body>
 </html>
 
